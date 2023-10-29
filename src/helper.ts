@@ -78,7 +78,7 @@ export async function insertImageNode(
   if (editor.selection === null) editor.restoreSelection()
 
   // 如果当前正好选中了图片，则 move 一下（如：连续上传多张图片时）
-  if (DomEditor.getSelectedNodeByType(editor, 'image')) {
+  if (DomEditor.getSelectedNodeByType(editor, 'image-source')) {
     editor.move(1)
   }
 

@@ -119,16 +119,10 @@ class InsertImage implements IModalMenu {
     $content.append(buttonContainerElem)
 
     // 设置 input val
-    $inputSrc.val(
-      'https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg'
-    )
-    $inputAlt.val(
-      'https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg'
-    )
-    $inputHref.val(
-      'https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg'
-    )
-    $inputImageSource.val('图片来源')
+    $inputSrc.val('')
+    $inputAlt.val('')
+    $inputHref.val('')
+    $inputImageSource.val('')
 
     // focus 一个 input（异步，此时 DOM 尚未渲染）
     setTimeout(() => {

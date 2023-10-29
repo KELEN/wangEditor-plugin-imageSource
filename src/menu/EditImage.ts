@@ -113,7 +113,8 @@ class EditImage implements IModalMenu {
         const alt = $content.find(`#${altInputId}`).val()
         const href = $content.find(`#${hrefInputId}`).val()
         const imageSource = $content.find(`#${imageSourceId}`).val()
-        this.updateImage(editor, src, alt, href, {}, imageSource)
+        const imageSourceHref = $content.find(`#${imageSourceHrefId}`).val()
+        this.updateImage(editor, src, alt, href, {}, imageSource, imageSourceHref)
         editor.hidePanelOrModal() // 隐藏 modal
       })
 
@@ -162,7 +163,8 @@ class EditImage implements IModalMenu {
     alt: string = '',
     href: string = '',
     style: ImageStyle = {},
-    source: string = ''
+    source: string = '',
+    imageSourceHref: string = ''
   ) {
     if (!src) return
 
@@ -172,7 +174,7 @@ class EditImage implements IModalMenu {
     if (this.isDisabled(editor)) return
 
     // 修改图片信息
-    updateImageNode(editor, src, alt, href, style, source)
+    updateImageNode(editor, src, alt, href, style, source, imageSourceHref)
   }
 }
 

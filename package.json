@@ -1,22 +1,19 @@
 {
-  "name": "@wangeditor/plugin-image-source",
+  "name": "wangeditor-plugin-image-source",
   "version": "1.0.1-beta.0",
-  "description": "wangEditor formula 公式",
+  "description": "wangEditor插入图片来源",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangeditor-team/wangEditor-plugin-formula.git"
+    "url": ""
   },
   "keywords": [
-    "公式",
-    "formula",
     "wangeditor"
   ],
-  "author": "github.com/wangfupeng1988",
+  "author": "Kelen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wangeditor-team/wangEditor-plugin-formula/issues"
   },
-  "homepage": "https://github.com/wangeditor-team/wangEditor-plugin-formula#readme",
+  "homepage": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/src/index.d.ts",
@@ -99,12 +96,15 @@
   },
   "peerDependencies": {
     "@wangeditor/editor": ">=5.0.0",
-    "katex": "^0.15.2",
     "snabbdom": "^3.3.1"
   },
   "dependencies": {
     "dom7": "^4.0.4",
     "lodash.throttle": "^4.1.1",
     "nanoid": "^3.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

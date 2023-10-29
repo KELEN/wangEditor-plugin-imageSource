@@ -41,7 +41,7 @@ const editorConfig: Partial<IEditorConfig> = {
         'imageSourceWidth50',
         'imageSourceWidth100',
       ],
-    }
+    },
   },
 }
 
@@ -91,7 +91,6 @@ const toolbar = createToolbar({
       keys: ['insertImageSource'],
     },
   },
-
 })
 
 // @ts-ignore 为了便于调试，暴露到 window

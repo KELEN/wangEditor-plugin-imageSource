@@ -38,7 +38,7 @@ function renderContainer(
 
   const containerId = genContainerId(editor, elemNode)
 
-  console.log('renderContainer', containerId)
+  // console.log('renderContainer', containerId)
 
   return (
     <div
@@ -202,7 +202,7 @@ function renderResizeContainer(
 }
 
 function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: IDomEditor): VNode {
-  console.log('render-elem renderImage', elemNode)
+  // console.log('render-elem renderImage', elemNode)
 
   const {
     src,
