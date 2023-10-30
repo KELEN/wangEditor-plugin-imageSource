@@ -222,7 +222,7 @@ function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: I
   // 【注意】void node 中，renderElem 不用处理 children 。core 会统一处理。
   const imgNode = <img style={{ width: '100%' }} src={src} alt={alt} data-href={href} />
   const vnode = (
-    <div
+    <figure
       className="w-e-image-source-container-inner"
       style={{
         position: 'relative',
@@ -241,7 +241,7 @@ function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: I
           </a>
         }
       </div>
-    </div>
+    </figure>
   )
 
   const isDisabled = editor.isDisabled()

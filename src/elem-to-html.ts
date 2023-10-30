@@ -18,7 +18,7 @@ function imageToHtml(elemNode: Element, childrenHtml: string): string {
   // if (height) styleStr += `height: ${height};`
 
   return `
-    <div 
+    <figure 
       data-w-e-type="image-source"
       data-w-e-is-void
       data-w-e-is-inline
@@ -31,12 +31,12 @@ function imageToHtml(elemNode: Element, childrenHtml: string): string {
       <img src="${src}" alt="${alt}" data-href="${href}" style="${styleStr}"/>
       ${
         source
-          ? `<a href="${
+          ? `<figcaption><a href="${
               sourceHref || 'javascript:void()'
-            }" class="image-source"><span>${source}</span></a>`
+            }" class="image-source"><span>${source}</span></a></figcaption>`
           : ''
       }
-</div>
+</figure>
   `
 }
 
