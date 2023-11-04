@@ -128,7 +128,7 @@ class InsertImage implements IModalMenu {
     $content.append(buttonContainerElem)
 
     // 设置 input val
-    $inputSrc.val('https://www.baidu.com/img/flexible/logo/pc/result.png')
+    $inputSrc.val('')
     $inputAlt.val('')
     $inputHref.val('')
     $inputImageSource.val('')
