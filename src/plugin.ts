@@ -6,7 +6,7 @@ import { SlateElement, SlateNode, SlateTransforms } from '@wangeditor/editor'
 import { IDomEditor, DomEditor } from '@wangeditor/editor'
 
 function withImageSource<T extends IDomEditor>(editor: T): T {
-  const { isInline, isVoid, insertNode, normalizeNode } = editor
+  const { isInline, isVoid, insertBreak, normalizeNode } = editor
   const newEditor = editor
 
   // 重写 isInline
@@ -52,6 +52,8 @@ function withImageSource<T extends IDomEditor>(editor: T): T {
         const path = DomEditor.findPath(newEditor, node)
         SlateTransforms.insertNodes(newEditor, p, { at: path })
       }
+    } else {
+      insertBreak()
     }
   }
 

@@ -43,17 +43,6 @@ const editorConfig: Partial<IEditorConfig> = {
   },
 }
 
-// const initHtml = `<p>12<span
-// data-w-e-type="image-source"
-// data-w-e-is-inline
-// data-w-e-is-void
-// data-src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
-// data-alt="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
-// data-href="href"
-// data-source="来源wiki"
-// style="width: 100px;">
-// <span>来源wiki</span></span>345</p>`
-
 const initHtml2 = `<p><br></p><figure 
 data-w-e-type="image-source" 
 data-w-e-is-void
