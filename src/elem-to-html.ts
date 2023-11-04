@@ -11,32 +11,25 @@ function imageToHtml(elemNode: Element, childrenHtml: string): string {
 
   // console.log('elem-to-html imageToHtml', elemNode, childrenHtml)
 
-  const { width = '', height = '' } = style || {}
+  const { width = '' } = style || {}
 
   let styleStr = ''
   if (width) styleStr += `width: ${width};`
   // if (height) styleStr += `height: ${height};`
 
-  return `
-    <figure 
-      data-w-e-type="image-source"
+  return `<figure 
+      data-w-e-type="image-source" 
       data-w-e-is-void
-      data-w-e-is-inline
-      data-src="${src}"
-      data-alt="${alt}"
-      data-href="${href}"
-      data-source="${source}"
-      style="${styleStr}"
-    >
-      <img src="${src}" alt="${alt}" data-href="${href}" style="${styleStr}"/>
-      ${
-        source
-          ? `<figcaption><a href="${
-              sourceHref || 'javascript:void()'
-            }" class="image-source"><span>${source}</span></a></figcaption>`
-          : ''
-      }
-</figure>
+      data-src="${src}" 
+      data-alt="${alt}" 
+      data-href="${href}" 
+      data-source="${source}">
+      <img 
+        src="${src}" 
+        style="${styleStr}" 
+      />
+      <figcaption>${source}</figcaption>
+    </figure>
   `
 }
 

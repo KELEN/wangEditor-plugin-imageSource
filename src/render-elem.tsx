@@ -5,10 +5,16 @@
 
 import throttle from 'lodash.throttle'
 import { Element as SlateElement, Transforms } from 'slate'
-import { jsx, VNode } from 'snabbdom'
+import { h, jsx, VNode } from 'snabbdom'
 import { IDomEditor, DomEditor } from '@wangeditor/editor'
 import $, { Dom7Array } from '@/utils/dom'
 import { ImageElement, ImageSourceElement } from './custom-types'
+
+const containerStyle = {
+  display: 'inline-block',
+  position: 'relative',
+  margin: '0 6px',
+}
 
 interface IImageSize {
   width?: string
@@ -24,34 +30,8 @@ function genContainerId(editor: IDomEditor, elemNode: SlateElement) {
 /**
  * 未选中时，渲染 image container
  */
-function renderContainer(
-  editor: IDomEditor,
-  elemNode: SlateElement,
-  imageVnode: VNode,
-  imageInfo: IImageSize
-): VNode {
-  const { width, height } = imageInfo
-
-  const style: any = {}
-  if (width) style.width = width
-  if (height) style.height = height
-
-  const containerId = genContainerId(editor, elemNode)
-
-  // console.log('renderContainer', containerId)
-
-  return (
-    <div
-      id={containerId}
-      className="w-e-image-source-container"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      {imageVnode}
-    </div>
-  )
+function renderContainer(editor: IDomEditor, elemNode: SlateElement, vnode: VNode): VNode {
+  return <div style={{ textAlign: 'center' }}>{vnode}</div>
 }
 
 /**
@@ -61,12 +41,11 @@ function renderResizeContainer(
   editor: IDomEditor,
   elemNode: SlateElement,
   vnode: VNode,
-  imgNode: VNode,
-  imageInfo: IImageSize
+  figcaptionNode: VNode
 ) {
   const $body = $('body')
   const containerId = genContainerId(editor, elemNode)
-  const { width, height, source } = imageInfo
+  // const { width, height, source } = imageInfo
 
   let originalX = 0
   let originalWith = 0
@@ -109,18 +88,15 @@ function renderResizeContainer(
   // mouseover callback （节流）
   const onMousemove = throttle((e: Event) => {
     e.preventDefault()
-
     const { clientX } = e as MouseEvent
     const gap = revers ? originalX - clientX : clientX - originalX // 考虑是否反转
     const newWidth = originalWith + gap
     const newHeight = originalHeight * (newWidth / originalWith) // 根据 width ，按比例计算 height
-
     // 实时修改 img 宽高 -【注意】这里只修改 DOM ，mouseup 时再统一不修改 node
     if ($container == null) return
     if (newWidth <= 15 || newHeight <= 15) return // 最小就是 15px
 
-    $container.find('.w-e-image-source-container-inner').css('width', `${newWidth}px`)
-    // $container.css('height', `${newHeight}px`)
+    $container.find('img').css('width', `${newWidth}px`)
   }, 100)
 
   function onMouseup(e: Event) {
@@ -128,15 +104,13 @@ function renderResizeContainer(
     $body.off('mousemove', onMousemove)
 
     if ($container == null) return
-    const newWidth = $container.find('.w-e-image-source-container-inner').width().toFixed(2)
-    const newHeight = $container.find('.w-e-image-source-container-inner').height().toFixed(2)
+    const newWidth = $container.width().toFixed(2)
 
     // 修改 node
     const props: Partial<ImageElement> = {
       style: {
         ...(elemNode as ImageElement).style,
         width: `${newWidth}px`,
-        // height: `${newHeight}px`,
       },
     }
 
@@ -149,61 +123,50 @@ function renderResizeContainer(
     $body.off('mouseup', onMouseup)
   }
 
-  const style: any = {}
-  if (width) style.width = width
-  if (height) style.height = height
-  // style.boxShadow = '0 0 0 1px #B4D5FF' // 自定义 selected 样式，因为有拖拽触手
-
   return (
     <div
-      id={containerId}
-      // style={style}
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-      className="w-e-image-source-container w-e-selected-image-container"
-      on={{
-        // 统一绑定拖拽触手的 mousedown 事件
-        mousedown: (e: MouseEvent) => {
-          const $target = $(e.target as Element)
-          if (!$target.hasClass('w-e-image-dragger')) {
-            // target 不是 .w-e-image-dragger 拖拽触手，则忽略
-            return
-          }
-          e.preventDefault()
-
-          if ($target.hasClass('left-top') || $target.hasClass('left-bottom')) {
-            revers = true // 反转。向右拖拽，减少宽度
-          }
-          init(e.clientX) // 初始化
-        },
+        textAlign: 'center',
       }}
     >
-      <div
-        className="w-e-image-source-container-inner"
+      <figure
+        id={containerId}
+        // style={style}
         style={{
-          position: 'relative',
-          display: 'inline-block',
-          textAlign: 'center',
-          ...style,
+          ...containerStyle,
+        }}
+        contentEditable={false}
+        className="w-e-image-source-container w-e-selected-image-container"
+        on={{
+          // 统一绑定拖拽触手的 mousedown 事件
+          mousedown: (e: MouseEvent) => {
+            const $target = $(e.target as Element)
+            if (!$target.hasClass('w-e-image-dragger')) {
+              // target 不是 .w-e-image-dragger 拖拽触手，则忽略
+              return
+            }
+            e.preventDefault()
+
+            if ($target.hasClass('left-top') || $target.hasClass('left-bottom')) {
+              revers = true // 反转。向右拖拽，减少宽度
+            }
+            init(e.clientX) // 初始化
+          },
         }}
       >
-        {imgNode}
+        {vnode}
         {/* 拖拽的触手，会统一在上级 DOM 绑定拖拽事件 */}
         <div className="w-e-image-dragger left-top"></div>
         <div className="w-e-image-dragger right-top"></div>
         <div className="w-e-image-dragger left-bottom"></div>
         <div className="w-e-image-dragger right-bottom"></div>
-        <div>{source}</div>
-      </div>
+        {figcaptionNode}
+      </figure>
     </div>
   )
 }
 
 function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: IDomEditor): VNode {
-  // console.log('render-elem renderImage', elemNode)
-
   const {
     src,
     alt = '',
@@ -212,47 +175,37 @@ function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: I
     source,
     sourceHref,
   } = elemNode as ImageSourceElement
-  const { width = '', height = '' } = style
+  const { width = '' } = style
   const selected = DomEditor.isNodeSelected(editor, elemNode) // 图片是否选中
 
   const imageStyle: any = {}
   if (width) imageStyle.width = width // '100%'
-  // if (height) imageStyle.height = '100%'
 
-  // 【注意】void node 中，renderElem 不用处理 children 。core 会统一处理。
-  const imgNode = <img style={{ width: '100%' }} src={src} alt={alt} data-href={href} />
-  const vnode = (
-    <figure
-      className="w-e-image-source-container-inner"
-      style={{
-        position: 'relative',
-        display: 'block',
-        margin: '0 auto',
-        textAlign: 'center',
-        ...imageStyle,
-      }}
-      contenteditable="false"
-    >
-      {imgNode}
-      <div>
-        {
-          <a href={sourceHref} target="_blank">
-            {source}
-          </a>
-        }
-      </div>
-    </figure>
+  const imgNode = h('img', { props: { src: src, alt: '' } })
+  const figcaptionNode = h('figcaption', {}, source)
+  const containerId = genContainerId(editor, elemNode)
+  const vnode = h(
+    'figure',
+    {
+      props: {
+        id: containerId,
+        contentEditable: false,
+        className: 'w-e-image-source-container',
+      },
+      style: containerStyle,
+    },
+    [imgNode, figcaptionNode]
   )
 
   const isDisabled = editor.isDisabled()
 
   if (selected && !isDisabled) {
     // 选中，未禁用 - 渲染 resize container
-    return renderResizeContainer(editor, elemNode, vnode, imgNode, { width, height, source })
+    return renderResizeContainer(editor, elemNode, imgNode, figcaptionNode)
   }
 
   // 其他，渲染普通 image container
-  return renderContainer(editor, elemNode, vnode, { width, height })
+  return renderContainer(editor, elemNode, vnode)
 }
 
 const renderImageConf = {

@@ -11,7 +11,6 @@ type EmptyText = {
 
 export type ImageStyle = {
   width?: string
-  height?: string
 }
 
 export type ImageElement = {
@@ -33,4 +32,12 @@ export type ImageSourceElement = {
   source?: string
   sourceHref?: string
   children: EmptyText[]
+}
+
+export type ImageSourceInput = {
+  src: string
+  alt?: string
+  href?: string
+  source?: string
+  sourceHref?: string
 }

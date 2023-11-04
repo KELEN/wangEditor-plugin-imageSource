@@ -5,7 +5,7 @@
 
 import { Transforms, Range, Editor } from 'slate'
 import { IDomEditor, DomEditor } from '@wangeditor/editor'
-import { ImageSourceElement, ImageStyle } from './custom-types'
+import { ImageSourceElement, ImageSourceInput, ImageStyle } from './custom-types'
 
 /**
  * 替换特殊字符
@@ -48,14 +48,9 @@ async function parseSrc(menuKey: string, editor: IDomEditor, src: string): Promi
   return src
 }
 
-export async function insertImageNode(
-  editor: IDomEditor,
-  src: string,
-  alt: string = '',
-  href: string = '',
-  source: string = '',
-  sourceHref: string = ''
-) {
+export async function insertImageNode(editor: IDomEditor, imageSourceInput: ImageSourceInput) {
+  const { src, alt = '', href = '' } = imageSourceInput
+
   const res = await check('insertImageSource', editor, src, alt, href)
   if (!res) return // 检查失败，终止操作
 
@@ -66,11 +61,8 @@ export async function insertImageNode(
     style: {
       width: '100px',
     },
+    ...imageSourceInput,
     src: parsedSrc,
-    alt,
-    href,
-    source: source,
-    sourceHref,
     children: [{ text: '' }],
   }
 
@@ -79,6 +71,7 @@ export async function insertImageNode(
 
   // 如果当前正好选中了图片，则 move 一下（如：连续上传多张图片时）
   if (DomEditor.getSelectedNodeByType(editor, 'image-source')) {
+    console.log('选中了图片，move 一下')
     editor.move(1)
   }
 
@@ -89,7 +82,7 @@ export async function insertImageNode(
 
   // 回调
   const { onInsertedImage } = editor.getMenuConfig('insertImageSource')
-  if (onInsertedImage) onInsertedImage(source)
+  if (onInsertedImage) onInsertedImage(imageSourceInput)
 }
 
 export async function updateImageNode(

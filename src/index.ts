@@ -22,6 +22,7 @@ const imageSource: Partial<IModuleConf> = {
   renderElems: [renderImageConf],
   elemsToHtml: [imageToHtmlConf],
   parseElemsHtml: [parseHtmlConf],
+  // preParseHtml: [preParseHtmlConf],
   menus: [
     insertImageMenuConf,
     deleteImageMenuConf,

@@ -15,6 +15,7 @@ import $, { Dom7Array, DOMElement } from '@/utils/dom'
 import { genRandomStr } from '@/utils/util'
 import { IMAGE_SVG } from '@/constants/index'
 import { insertImageNode, isInsertImageMenuDisabled } from '../helper'
+import { ImageSourceInput } from '../custom-types'
 
 /**
  * 生成唯一的 DOM ID
@@ -86,6 +87,7 @@ class InsertImage implements IModalMenu {
       '图片来源链接',
       imageSourceHrefInputId
     )
+    const $inputImageSourceHref = $(inputImageSourceHrefElem)
     const [buttonContainerElem] = genModalButtonElems(buttonId, t('common.ok'))
 
     if (this.$content == null) {
@@ -99,7 +101,14 @@ class InsertImage implements IModalMenu {
         const alt = $content.find(`#${altInputId}`).val().trim()
         const href = $content.find(`#${hrefInputId}`).val().trim()
         const imageSource = $content.find(`#${imageSourceInputId}`).val().trim()
-        this.insertImage(editor, src, alt, href, imageSource)
+        const imageSourceHref = $content.find(`#${imageSourceHrefInputId}`).val().trim()
+        this.insertImage(editor, {
+          src,
+          alt,
+          href,
+          source: imageSource,
+          sourceHref: imageSourceHref,
+        } as ImageSourceInput)
         editor.hidePanelOrModal() // 隐藏 modal
       })
 
@@ -119,10 +128,11 @@ class InsertImage implements IModalMenu {
     $content.append(buttonContainerElem)
 
     // 设置 input val
-    $inputSrc.val('')
-    $inputAlt.val('')
-    $inputHref.val('')
-    $inputImageSource.val('')
+    $inputSrc.val('https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png')
+    $inputAlt.val('https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png')
+    $inputHref.val('href')
+    $inputImageSource.val('来源wiki')
+    $inputImageSourceHref.val('https://www.baidu.com')
 
     // focus 一个 input（异步，此时 DOM 尚未渲染）
     setTimeout(() => {
@@ -134,11 +144,7 @@ class InsertImage implements IModalMenu {
 
   private insertImage(
     editor: IDomEditor,
-    src: string,
-    alt: string = '',
-    href: string = '',
-    imageSource: string = '',
-    imageSourceHref: string = ''
+    { src, alt, href, source, sourceHref }: ImageSourceInput
   ) {
     if (!src) return
 
@@ -148,7 +154,13 @@ class InsertImage implements IModalMenu {
     if (this.isDisabled(editor)) return
 
     // 插入图片
-    insertImageNode(editor, src, alt, href, imageSource, imageSourceHref)
+    insertImageNode(editor, {
+      src,
+      alt,
+      href,
+      source,
+      sourceHref,
+    })
   }
 }
 

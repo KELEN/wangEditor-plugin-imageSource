@@ -33,32 +33,35 @@ const editorConfig: Partial<IEditorConfig> = {
       menuKeys: ['editLink', 'unLink', 'viewLink', 'convertToLinkCard'],
     },
     'image-source': {
-      menuKeys: [
-        'editImageSource',
-        'deleteImageSource',
-        'viewImageSourceLink',
-        'imageSourceWidth30',
-        'imageSourceWidth50',
-        'imageSourceWidth100',
-      ],
+      menuKeys: ['editImageSource', 'deleteImageSource', 'viewImageSourceLink'],
     },
   },
 }
 
-const initHtml = `<p><br></p>
-<div 
-  data-w-e-type="image-source"
-  data-w-e-is-void
-  data-w-e-is-inline
-  data-src="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg"
-  data-alt="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg"
-  data-href="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg"
-  data-source="图片来源"
-  style="width: 100px;"
->
-  <img src="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg" alt="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg" data-href="https://himg.bdimg.com/sys/portrait/item/public.1.d5687a4f.U-Oa-nIwRRoeMouAR9Fpwg.jpg" style="width: 100px;"/><div class="image-source">图片来源</div>
-</div>
+// const initHtml = `<p>12<span
+// data-w-e-type="image-source"
+// data-w-e-is-inline
+// data-w-e-is-void
+// data-src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+// data-alt="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+// data-href="href"
+// data-source="来源wiki"
+// style="width: 100px;">
+// <span>来源wiki</span></span>345</p>`
+
+const initHtml2 = `<p><br></p><figure 
+data-w-e-type="image-source" 
+data-w-e-is-void
+data-src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" 
+data-alt="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" 
+data-href="href" 
+data-source="来源wiki">
+<img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" />
+<figcaption>来源wiki</figcaption>
+</figure>
 <p><br></p>`
+
+const initHtml3 = `<p>123<strong><i>12321</i></strong>321</p>`
 
 // 创建编辑器
 const editor = createEditor({
@@ -79,7 +82,7 @@ const editor = createEditor({
   //     children: [{ text: '' }],
   //   },
   // ],
-  html: `<p>hello&nbsp;world</p>${initHtml}`,
+  html: initHtml2,
   // html: `<p>hello&nbsp;<a href="http://news.baidu.com/" target="_blank">百度新闻</a>&nbsp;world</p>`,
 })
 const toolbar = createToolbar({
