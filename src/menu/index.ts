@@ -10,6 +10,7 @@ import ViewImageLink from './ViewImageLink'
 import ImageWidth30 from './Width30'
 import ImageWidth50 from './Width50'
 import ImageWidth100 from './Width100'
+import ImageWidthReset from './WidthReset'
 import { genImageMenuConfig } from './config'
 
 const config = genImageMenuConfig() // menu config
@@ -65,5 +66,12 @@ export const imageWidth100MenuConf = {
   key: 'imageSourceWidth100',
   factory() {
     return new ImageWidth100()
+  },
+}
+
+export const imageSizeResetMenuConf = {
+  key: 'imageSourceWidthReset',
+  factory() {
+    return new ImageWidthReset()
   },
 }

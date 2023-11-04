@@ -2038,35 +2038,8 @@
     scroll-into-view-if-needed "^2.2.28"
     slate-history "^0.66.0"
 
-"@wangeditor/editor@D:\\kelen\\wangEditor\\packages\\editor":
+"@wangeditor/editor@file:../wangEditor/packages/editor":
   version "5.1.23"
-  dependencies:
-    "@uppy/core" "^2.1.1"
-    "@uppy/xhr-upload" "^2.0.3"
-    "@wangeditor/basic-modules" "^1.1.7"
-    "@wangeditor/code-highlight" "^1.0.3"
-    "@wangeditor/core" "^1.1.19"
-    "@wangeditor/list-module" "^1.0.5"
-    "@wangeditor/table-module" "^1.1.4"
-    "@wangeditor/upload-image-module" "^1.0.2"
-    "@wangeditor/video-module" "^1.1.4"
-    dom7 "^3.0.0"
-    is-hotkey "^0.2.0"
-    lodash.camelcase "^4.3.0"
-    lodash.clonedeep "^4.5.0"
-    lodash.debounce "^4.0.8"
-    lodash.foreach "^4.5.0"
-    lodash.isequal "^4.5.0"
-    lodash.throttle "^4.1.1"
-    lodash.toarray "^4.4.0"
-    nanoid "^3.2.0"
-    slate "^0.72.0"
-    snabbdom "^3.1.0"
-
-"@wangeditor/editor@^5.0.0":
-  version "5.1.23"
-  resolved "https://registry.npmmirror.com/@wangeditor/editor/-/editor-5.1.23.tgz#c9d2007b7cb0ceef6b72692b4ee87b01ee2367b3"
-  integrity sha512-0RxfeVTuK1tktUaPROnCoFfaHVJpRAIE2zdS0mpP+vq1axVQpLjM8+fCvKzqYIkH0Pg+C+44hJpe3VVroSkEuQ==
   dependencies:
     "@uppy/core" "^2.1.1"
     "@uppy/xhr-upload" "^2.0.3"

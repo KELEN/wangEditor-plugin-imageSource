@@ -72,11 +72,11 @@ class InsertImage implements IModalMenu {
     } = this
 
     // 获取 input button elem
-    const [srcContainerElem, inputSrcElem] = genModalInputElems('src', srcInputId)
+    const [srcContainerElem, inputSrcElem] = genModalInputElems('图片地址', srcInputId)
     const $inputSrc = $(inputSrcElem)
-    const [altContainerElem, inputAltElem] = genModalInputElems('描述', altInputId)
+    const [altContainerElem, inputAltElem] = genModalInputElems('图片描述', altInputId)
     const $inputAlt = $(inputAltElem)
-    const [hrefContainerElem, inputHrefElem] = genModalInputElems('href', hrefInputId)
+    const [hrefContainerElem, inputHrefElem] = genModalInputElems('图片链接', hrefInputId)
     const $inputHref = $(inputHrefElem)
     const [imageSourceContainerElem, inputImageSourceElem] = genModalInputElems(
       '图片来源',
@@ -128,11 +128,11 @@ class InsertImage implements IModalMenu {
     $content.append(buttonContainerElem)
 
     // 设置 input val
-    $inputSrc.val('https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png')
-    $inputAlt.val('https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png')
-    $inputHref.val('href')
-    $inputImageSource.val('来源wiki')
-    $inputImageSourceHref.val('https://www.baidu.com')
+    $inputSrc.val('https://www.baidu.com/img/flexible/logo/pc/result.png')
+    $inputAlt.val('')
+    $inputHref.val('')
+    $inputImageSource.val('')
+    $inputImageSourceHref.val('')
 
     // focus 一个 input（异步，此时 DOM 尚未渲染）
     setTimeout(() => {

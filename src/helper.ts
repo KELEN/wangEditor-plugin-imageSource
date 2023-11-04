@@ -58,9 +58,7 @@ export async function insertImageNode(editor: IDomEditor, imageSourceInput: Imag
 
   const imageSourceNode = {
     type: 'image-source',
-    style: {
-      width: '100px',
-    },
+    style: {},
     ...imageSourceInput,
     src: parsedSrc,
     children: [{ text: '' }],

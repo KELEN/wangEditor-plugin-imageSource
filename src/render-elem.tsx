@@ -18,7 +18,6 @@ const containerStyle = {
 
 interface IImageSize {
   width?: string
-  height?: string
   source?: string
 }
 
@@ -176,12 +175,19 @@ function renderImage(elemNode: SlateElement, children: VNode[] | null, editor: I
     sourceHref,
   } = elemNode as ImageSourceElement
   const { width = '' } = style
+
   const selected = DomEditor.isNodeSelected(editor, elemNode) // 图片是否选中
 
   const imageStyle: any = {}
   if (width) imageStyle.width = width // '100%'
 
-  const imgNode = h('img', { props: { src: src, alt: '' } })
+  const imgNode = h('img', {
+    props: {
+      src: src,
+      alt: alt,
+    },
+    style: imageStyle,
+  })
   const figcaptionNode = h('figcaption', {}, source)
   const containerId = genContainerId(editor, elemNode)
   const vnode = h(

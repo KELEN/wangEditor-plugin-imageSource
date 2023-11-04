@@ -52,7 +52,6 @@ abstract class ImageWidthBaseClass implements IButtonMenu {
       style: {
         ...style,
         width: this.value, // 修改 width
-        height: '', // 清空 height
       },
     }
 

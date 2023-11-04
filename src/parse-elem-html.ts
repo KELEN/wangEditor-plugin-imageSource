@@ -12,17 +12,24 @@ function parseHtml(elem: DOMElement, children: Descendant[], editor: IDomEditor)
   let href = $elem.attr('data-href') || ''
   href = decodeURIComponent(href) // 兼容 V4
 
-  const style = {}
-  const width = getStyleValue($elem, 'width')
-  if (width) Object.assign(style, { width })
+  const style: Record<string, string> = {}
+  const styleStr = ($elem.attr('data-style') || '').split(';').map((s: string) => s.trim())
+  styleStr.forEach((s: string) => {
+    const [key, value] = s.split(':').map(s => s.trim())
+    if (key && value) style[key] = value
+  })
+
+  // const width = getStyleValue($elem, 'width')
+  // if (width) Object.assign(style, { width })
 
   return {
     type: 'image-source',
     src: $elem.attr('data-src') || '',
     alt: $elem.attr('data-alt') || '',
     href,
-    style: style,
+    style,
     source: $elem.attr('data-source') || '',
+    sourceHref: $elem.attr('data-source-href') || '',
     children: [{ text: '' }], // void node 有一个空白 text
   }
 }

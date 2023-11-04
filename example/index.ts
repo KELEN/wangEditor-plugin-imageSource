@@ -33,7 +33,12 @@ const editorConfig: Partial<IEditorConfig> = {
       menuKeys: ['editLink', 'unLink', 'viewLink', 'convertToLinkCard'],
     },
     'image-source': {
-      menuKeys: ['editImageSource', 'deleteImageSource', 'viewImageSourceLink'],
+      menuKeys: [
+        'editImageSource',
+        'deleteImageSource',
+        'viewImageSourceLink',
+        'imageSourceWidthReset',
+      ],
     },
   },
 }
@@ -82,7 +87,19 @@ const editor = createEditor({
   //     children: [{ text: '' }],
   //   },
   // ],
-  html: initHtml2,
+  html: `<p><br></p><figure 
+  data-w-e-type="image-source" 
+  data-w-e-is-void
+  data-src="https://www.baidu.com/img/flexible/logo/pc/result.png" 
+  data-alt="" 
+  data-href=""
+  data-source="123"
+  data-source-href=""
+  data-style="width: 274.99px;">
+  <img src="https://www.baidu.com/img/flexible/logo/pc/result.png" style="width: 274.99px;" alt="" />
+  <figcaption>123</figcaption>
+</figure>
+<p><br></p>`,
   // html: `<p>hello&nbsp;<a href="http://news.baidu.com/" target="_blank">百度新闻</a>&nbsp;world</p>`,
 })
 const toolbar = createToolbar({

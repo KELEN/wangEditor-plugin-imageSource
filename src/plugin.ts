@@ -39,6 +39,22 @@ function withImageSource<T extends IDomEditor>(editor: T): T {
     }
   }
 
+  newEditor.insertBreak = () => {
+    const { selection } = newEditor
+    if (selection == null) return
+    // check select node type
+    const node = DomEditor.getSelectedNodeByType(newEditor, 'image-source')
+    if (node) {
+      const type = DomEditor.getNodeType(node)
+      if (type === 'image-source') {
+        // insert p before node
+        const p = DomEditor.genEmptyParagraph()
+        const path = DomEditor.findPath(newEditor, node)
+        SlateTransforms.insertNodes(newEditor, p, { at: path })
+      }
+    }
+  }
+
   // 返回 editor ，重要！
   return newEditor
 }
