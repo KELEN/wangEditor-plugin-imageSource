@@ -17,6 +17,7 @@ import {
   imageWidth50MenuConf,
   imageWidth100MenuConf,
   imageSizeResetMenuConf,
+  covertImageToImageSourceMenuConf,
 } from './menu/index'
 
 const imageSource: Partial<IModuleConf> = {
@@ -33,6 +34,7 @@ const imageSource: Partial<IModuleConf> = {
     imageWidth50MenuConf,
     imageWidth100MenuConf,
     imageSizeResetMenuConf,
+    covertImageToImageSourceMenuConf,
   ],
   editorPlugin: withImageSource,
 }

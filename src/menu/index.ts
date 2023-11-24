@@ -12,6 +12,7 @@ import ImageWidth50 from './Width50'
 import ImageWidth100 from './Width100'
 import ImageWidthReset from './WidthReset'
 import { genImageMenuConfig } from './config'
+import CovertImageToImageSource from './covertImageToImageSource'
 
 const config = genImageMenuConfig() // menu config
 
@@ -73,5 +74,12 @@ export const imageSizeResetMenuConf = {
   key: 'imageSourceWidthReset',
   factory() {
     return new ImageWidthReset()
+  },
+}
+
+export const covertImageToImageSourceMenuConf = {
+  key: 'covertImageToImageSource',
+  factory() {
+    return new CovertImageToImageSource()
   },
 }

@@ -20,7 +20,11 @@ function imageToHtml(elemNode: Element, childrenHtml: string): string {
 
   const imgStr = `<img src="${src}" ${styleStr ? `style="${styleStr}"` : ''} alt="${alt}" />`
   const figcaption = source
-    ? `<figcaption>${sourceHref ? `<a href="${sourceHref}">${source}</a>` : source}</figcaption>`
+    ? `<figcaption>${
+        sourceHref
+          ? `<a href="${sourceHref}" target="_blank" rel="noopener noreferrer">${source}</a>`
+          : source
+      }</figcaption>`
     : ''
 
   return `<figure 

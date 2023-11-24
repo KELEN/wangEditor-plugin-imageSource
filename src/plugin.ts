@@ -51,6 +51,8 @@ function withImageSource<T extends IDomEditor>(editor: T): T {
         const p = DomEditor.genEmptyParagraph()
         const path = DomEditor.findPath(newEditor, node)
         SlateTransforms.insertNodes(newEditor, p, { at: path })
+        // insert p after if node is last
+        const isLast = DomEditor.isLastNode(newEditor, node)
       }
     } else {
       insertBreak()

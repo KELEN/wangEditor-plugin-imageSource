@@ -30,7 +30,7 @@ const editorConfig: Partial<IEditorConfig> = {
   },
   hoverbarKeys: {
     link: {
-      menuKeys: ['editLink', 'unLink', 'viewLink', 'convertToLinkCard'],
+      menuKeys: ['editLink', 'unLink', 'viewLink'],
     },
     'image-source': {
       menuKeys: [
@@ -39,6 +39,9 @@ const editorConfig: Partial<IEditorConfig> = {
         'viewImageSourceLink',
         'imageSourceWidthReset',
       ],
+    },
+    image: {
+      menuKeys: ['editImage', 'deleteImage', 'viewImageLink', 'covertImageToImageSource'],
     },
   },
 }
