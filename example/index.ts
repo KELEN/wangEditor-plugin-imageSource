@@ -100,7 +100,7 @@ const toolbar = createToolbar({
   config: {
     insertKeys: {
       index: 1,
-      keys: ['insertImageSource'],
+      keys: ['insertImageSource', 'insertPLabel', 'removePLabel'],
     },
   },
 })

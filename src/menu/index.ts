@@ -13,6 +13,8 @@ import ImageWidth100 from './Width100'
 import ImageWidthReset from './WidthReset'
 import { genImageMenuConfig } from './config'
 import CovertImageToImageSource from './covertImageToImageSource'
+import InsertPLabel from './InsertPLabel'
+import RemovePLabel from './RemovePLabel'
 
 const config = genImageMenuConfig() // menu config
 
@@ -81,5 +83,19 @@ export const covertImageToImageSourceMenuConf = {
   key: 'covertImageToImageSource',
   factory() {
     return new CovertImageToImageSource()
+  },
+}
+
+export const insertPLabelMenuConf = {
+  key: 'insertPLabel',
+  factory() {
+    return new InsertPLabel()
+  },
+}
+
+export const removePLabelMenuConf = {
+  key: 'removePLabel',
+  factory() {
+    return new RemovePLabel()
   },
 }
